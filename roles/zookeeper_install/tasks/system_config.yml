@@ -1,0 +1,24 @@
+---
+- name: Check if /etc/init exists
+  stat: path=/etc/init/
+  register: etc_init
+
+- name: "Ensure the zookeeper dir exists at {{zookeeper_dir}}"
+  file: path={{zookeeper_dir}} state=directory
+
+- name: Upstart script.
+  template: src=zookeeper.conf.j2 dest=/etc/init/zookeeper.conf
+  when:
+    - etc_init.stat.exists == true
+  notify:
+    - Restart zookeeper
+
+- name: Systemd script.
+  template: src=zookeeper.service.j2 dest=/lib/systemd/system/zookeeper.service
+  notify:
+    - Reload systemctl daemon
+    - Restart zookeeper
+
+- name: Enable zookeeper service
+  service: name=zookeeper enabled=yes
+  tags: deploy

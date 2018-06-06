@@ -1,0 +1,23 @@
+---
+zookeeper_version: 3.4.12
+zookeeper_url: http://www.us.apache.org/dist/zookeeper/zookeeper-{{zookeeper_version}}/zookeeper-{{zookeeper_version}}.tar.gz
+apt_cache_timeout: 3600
+client_port: 2181
+init_limit: 5
+sync_limit: 2
+tick_time: 2000
+zookeeper_cluster_ports: "2888:3888"
+zookeeper_max_client_connections: 60
+zookeeper_debian_apt_install: false
+
+data_dir: /var/lib/zookeeper
+log_dir: /var/log/zookeeper
+zookeeper_dir: /usr/share/zookeeper
+zookeeper_conf_dir: /etc/zookeeper
+zookeeper_all_hosts: "{{ groups['zookeeper'] }}"
+zookeeper_hosts_hostname: "{{inventory_hostname}}"
+zookeeper_hosts_id: "{{ hostvars[inventory_hostname].id }}"
+# List of dict (i.e. {zookeeper_hosts:[{host:,id:},{host:,id:},...]})
+zookeeper_hosts:
+  - host: "{{zookeeper_hosts_hostname}}" # the machine running
+    id: "{{ zookeeper_hosts_id }}"

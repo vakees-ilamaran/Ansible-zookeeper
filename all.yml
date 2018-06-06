@@ -1,0 +1,8 @@
+---
+- hosts: zookeeper
+  become: yes
+  roles:
+    - zookeeper_install
+  vars_files:
+    - vars/main.yml
+

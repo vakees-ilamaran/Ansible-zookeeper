@@ -35,7 +35,8 @@ How to add the details in inventory
 ```
 [zookeeper]
 hostname id=1 #please add the hostnames in the shown format
-hostname id=2 
+hostname id=2
+hostname id=3
 
 ```
 Example:
@@ -43,6 +44,7 @@ Example:
 [zookeeper]
 ec2-xx-xxx-xx-xxx.us-west-2.compute.amazonaws.com id=1
 ec2-xx-xxx-xx-xxx.us-west-2.compute.amazonaws.com id=2
+ec2-xx-xxx-xx-xxx.us-west-2.compute.amazonaws.com id=3
 ```
 
 How to run 
